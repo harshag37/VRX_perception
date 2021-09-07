@@ -13,7 +13,7 @@ class image_feature:
         self.image_pub = rospy.Publisher("impub",
             Image,queue_size = 10)
         self.bridge = CvBridge()
-        self.pyrDown=1
+        self.pyrDown=2
         # subscribed Topic
         self.subscriber = rospy.Subscriber("/wamv/sensors/cameras/front_right_camera/image_raw",
             Image, self.callback,  queue_size = 10)
