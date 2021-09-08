@@ -13,7 +13,7 @@ class image_feature:
         self.image_pub = rospy.Publisher("impub",
             Image,queue_size = 10)
         self.bridge = CvBridge()
-        self.pyrDown=1
+        self.pyrDown=2
         # subscribed Topic
         self.subscriber = rospy.Subscriber("/wamv/sensors/cameras/front_right_camera/image_raw",
             Image, self.callback,  queue_size = 10)
@@ -25,12 +25,15 @@ class image_feature:
             for i in range(self.pyrDown):
                 scenePyr = cv2.pyrDown(scenePyr)
         imghsv=cv2.cvtColor(scenePyr,cv2.COLOR_BGR2HSV)
+<<<<<<< HEAD
         # height, width = scenePyr.shape[:2]
         # self.result.write(scenePyr)
         # imggray=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
         # kernel=np.array((5,5))
         cv2.imwrite('kang'+str(self.i)+'.jpg',scenePyr)
         self.i+=1
+=======
+>>>>>>> 389afc196e40c195fa0c85b2ed619e2976f9b66e
         lower_red = np.array([0, 50, 50])
         upper_red = np.array([10, 255, 255])
         img_mask=cv2.inRange(imghsv, lower_red, upper_red)
