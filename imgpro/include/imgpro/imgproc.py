@@ -17,16 +17,20 @@ class image_feature:
         # subscribed Topic
         self.subscriber = rospy.Subscriber("/wamv/sensors/cameras/front_right_camera/image_raw",
             Image, self.callback,  queue_size = 10)
-        
-
+        # self.result = cv2.VideoWriter('filename.avi', cv2.VideoWriter_fourcc(*'MJPG'),10, (360,640))
+        self.i=0
     def imgpro(self,data):
         scenePyr=data
         if self.pyrDown > 0:
             for i in range(self.pyrDown):
                 scenePyr = cv2.pyrDown(scenePyr)
         imghsv=cv2.cvtColor(scenePyr,cv2.COLOR_BGR2HSV)
+        # height, width = scenePyr.shape[:2]
+        # self.result.write(scenePyr)
         # imggray=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
         # kernel=np.array((5,5))
+        cv2.imwrite('kang'+str(self.i)+'.jpg',scenePyr)
+        self.i+=1
         lower_red = np.array([0, 50, 50])
         upper_red = np.array([10, 255, 255])
         img_mask=cv2.inRange(imghsv, lower_red, upper_red)
