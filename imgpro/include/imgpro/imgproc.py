@@ -22,6 +22,8 @@ class image_feature:
         "black":np.array([[0,0,0],[0, 0, 9],[0],[],[]]),
         "yellow":np.array([[27,226,93],[32, 255, 130],[0],[],[]]),
         "green":np.array([[49, 244, 90],[64, 255, 119],[0],[],[]])}
+
+
     def FindColor(self,img):
         imghsv=cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
         kernel=np.array((7,7))
@@ -41,6 +43,9 @@ class image_feature:
                     cv2.rectangle(img,(x,y),(x+w,y+h),(0,0,255),2)
                     cv2.putText(img, key,(int(x+w/2),int(y+h/2)),cv2.FONT_HERSHEY_COMPLEX,0.5,(0,0,255),1)
         return img
+
+
+        
     def callback(self, ros_data):
         msg=self.bridge.imgmsg_to_cv2(ros_data,"bgr8")
         msg=self.FindColor(msg)
