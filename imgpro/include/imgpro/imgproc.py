@@ -30,7 +30,6 @@ class image_feature:
         for key ,value in self.color.items():
             value[2][0]=0
             img_mask=cv2.inRange(imghsv,np.array(value[0]),np.array(value[1]))
-            imgdilate=cv2.dilate(img_mask,kernel,iterations=30)
             cnts_red, hierarchy = cv2.findContours(img_mask,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
             for cnt in cnts_red:
                 area=cv2.contourArea(cnt)
